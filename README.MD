@@ -21,8 +21,6 @@ Request sample
 GET/
 	http://xx.xx.xx.xx:8000/question/{groupid}
 	http://xx.xx.xx.xx:8000/tracking/{userid}
-	router.HandleFunc("/question", CreateQuestion).Methods("POST")
-	router.HandleFunc("/tracking", CreateTracking).Methods("POST")
 POST
 	http://xx.xx.xx.xx:8000/question
 	body:

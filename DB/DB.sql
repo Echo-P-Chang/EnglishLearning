@@ -355,6 +355,76 @@ SELECT [UserID]
 
 END
 GO
+
+USE [EnglishLearning]
+GO
+
+/****** Object:  StoredProcedure [dbo].[Select_TrackingByUserID]    Script Date: 2/27/2018 8:32:24 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE [dbo].[Select_TrackingByUserID] 
+    @UserID      INT
+AS
+BEGIN
+
+SET NOCOUNT ON;
+
+SELECT * FROM [dbo].[Tracking] WHERE [UserID]=@UserID
+
+
+
+END
+GO
+
+USE [EnglishLearning]
+GO
+
+/****** Object:  StoredProcedure [dbo].[Insert_Tracking]    Script Date: 2/27/2018 8:39:48 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+CREATE PROCEDURE [dbo].[Insert_Tracking] 
+    @UserID      INT,
+    @SessionID     nvarchar(50),
+    @Stage    NVARCHAR(50),
+    @Msg      NVARCHAR(100),
+	@QuestionID int,
+	@Answer nvarchar(200)
+AS
+BEGIN
+
+SET NOCOUNT ON;
+
+INSERT INTO [dbo].[Tracking]
+           ([UserID]
+           ,[SessionID]
+           ,[Stage]
+           ,[Msg]
+           ,[LogTime]
+           ,[QuestionID]
+           ,[Answer])
+     VALUES
+           (@UserID,@SessionID,@Stage,@Msg,getutcdate(),@QuestionID,@Answer)
+
+RETURN @@ROWCOUNT
+
+END
+GO
+
+
+
+
+
 USE [master]
 GO
 ALTER DATABASE [EnglishLearning] SET  READ_WRITE 
